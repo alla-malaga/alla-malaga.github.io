@@ -1,0 +1,64 @@
+---
+import { locales, getDictionary, localePath, type Locale } from '../i18n';
+
+interface Props {
+  current: Locale;
+  label: string;
+}
+const { current, label } = Astro.props;
+---
+<nav class="lang" aria-label={label}>
+  <ul>
+    {
+      locales.map((l) => {
+        const d = getDictionary(l);
+        return (
+          <li>
+            <a
+              href={localePath(l)}
+              hreflang={d.htmlLang}
+              lang={d.htmlLang}
+              aria-current={l === current ? 'page' : undefined}
+              title={d.languageName}
+            >
+              <span aria-hidden="true">{d.languageShort}</span>
+              <span class="visually-hidden">{d.languageName}</span>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>
+
+<style>
+  ul {
+    display: flex;
+    list-style: none;
+    gap: 2px;
+    padding: 3px;
+    background: var(--c-surface);
+    border-radius: 999px;
+  }
+  a {
+    display: grid;
+    place-items: center;
+    min-width: 2.5rem;
+    min-height: 2.25rem;
+    padding-inline: var(--space-2);
+    border-radius: 999px;
+    color: var(--c-ink-muted);
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--c-ink);
+  }
+  a[aria-current='page'] {
+    background: var(--c-bg);
+    color: var(--c-ink);
+    box-shadow: 0 1px 2px rgb(42 38 34 / 0.12);
+  }
+</style>

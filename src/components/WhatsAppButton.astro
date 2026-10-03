@@ -1,0 +1,69 @@
+---
+import { hasWhatsApp } from '../config/site';
+import { whatsappUrl } from '../lib/whatsapp';
+import type { Dictionary } from '../i18n';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+
+interface Props {
+  t: Dictionary;
+  variant?: 'primary' | 'compact' | 'light';
+}
+const { t, variant = 'primary' } = Astro.props;
+const label = variant === 'compact' ? t.whatsapp.short : t.whatsapp.button;
+---
+{
+  hasWhatsApp && (
+    <a
+      class:list={['wa-btn', `wa-btn--${variant}`]}
+      href={whatsappUrl(t.whatsapp.prefill)}
+      target="_blank"
+      rel="noopener"
+      aria-label={variant === 'compact' ? t.whatsapp.ariaLabel : undefined}
+    >
+      <WhatsAppIcon size={variant === 'compact' ? 18 : 22} />
+      <span>{label}</span>
+    </a>
+  )
+}
+
+<style>
+  .wa-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 3.25rem;
+    padding: var(--space-3) var(--space-5);
+    border-radius: 999px;
+    background: var(--c-accent);
+    color: var(--c-on-accent);
+    font-weight: 600;
+    font-size: var(--step-0);
+    line-height: 1.2;
+    text-decoration: none;
+    box-shadow: 0 1px 0 rgb(0 0 0 / 0.08), 0 8px 20px -10px rgb(165 69 42 / 0.6);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  .wa-btn:hover {
+    background: var(--c-accent-hover);
+    color: var(--c-on-accent);
+  }
+  .wa-btn:active {
+    transform: translateY(1px);
+  }
+  .wa-btn--compact {
+    min-height: 2.75rem;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--step--1);
+    box-shadow: none;
+  }
+  .wa-btn--light {
+    background: var(--c-on-accent);
+    color: var(--c-accent);
+    box-shadow: none;
+  }
+  .wa-btn--light:hover {
+    background: #fff;
+    color: var(--c-accent-hover);
+  }
+</style>

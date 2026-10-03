@@ -1,0 +1,84 @@
+---
+import type { Dictionary } from '../i18n';
+import WhatsAppButton from './WhatsAppButton.astro';
+import Illustration from './Illustration.astro';
+
+interface Props { t: Dictionary }
+const { t } = Astro.props;
+---
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container grid">
+    <div class="copy">
+      <p class="eyebrow">{t.hero.eyebrow}</p>
+      <h1 id="hero-title">{t.hero.title}</h1>
+      <p class="lead">{t.hero.lead}</p>
+      <div class="cta">
+        <WhatsAppButton t={t} />
+        <ul class="jump">
+          <li><a href="#food">{t.hero.foodLink}</a></li>
+          <li><a href="#cleaning">{t.hero.cleaningLink}</a></li>
+        </ul>
+      </div>
+    </div>
+    <Illustration name="hero" class="art" />
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(2.5rem, 1.5rem + 5vw, 6rem) var(--space-section);
+    overflow: hidden;
+  }
+  .grid {
+    display: grid;
+    gap: var(--space-7);
+    align-items: center;
+  }
+  .copy {
+    display: grid;
+    gap: var(--space-5);
+    max-width: 36rem;
+  }
+  .lead {
+    font-size: var(--step-1);
+    line-height: 1.55;
+    color: var(--c-ink-muted);
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) var(--space-5);
+    margin-top: var(--space-2);
+  }
+  .jump {
+    display: flex;
+    gap: var(--space-5);
+    list-style: none;
+  }
+  .jump a {
+    font-weight: 600;
+    color: var(--c-sea);
+    text-decoration: underline;
+    text-decoration-color: var(--c-sun);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.35em;
+  }
+  .jump a:hover {
+    color: var(--c-accent);
+  }
+  .grid :global(.art) {
+    width: min(78%, 26rem);
+    height: auto;
+    justify-self: center;
+  }
+  @media (min-width: 52rem) {
+    .grid {
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: var(--space-8);
+    }
+    .grid :global(.art) {
+      justify-self: end;
+    }
+  }
+</style>

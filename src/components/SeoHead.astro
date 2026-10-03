@@ -1,0 +1,57 @@
+---
+import { site } from '../config/site';
+import { locales, defaultLocale, getDictionary, localePath, absoluteUrl, publicPath, type Dictionary } from '../i18n';
+import { jsonLd } from '../lib/schema';
+
+interface Props {
+  t: Dictionary;
+  title: string;
+  description: string;
+  /** Pages like 404 are not indexed and get no alternates. */
+  noindex?: boolean;
+  schema?: unknown;
+}
+const { t, title, description, noindex = false, schema } = Astro.props;
+const canonical = absoluteUrl(localePath(t.locale));
+const ogImage = absoluteUrl(publicPath(site.ogImage));
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="theme-color" content={site.themeColor} />
+<link rel="icon" href={publicPath('favicon.svg')} type="image/svg+xml" />
+<link rel="apple-touch-icon" href={publicPath('apple-touch-icon.png')} />
+<link rel="sitemap" href={publicPath('sitemap-index.xml')} />
+{
+  noindex ? (
+    <meta name="robots" content="noindex" />
+  ) : (
+    <>
+      <link rel="canonical" href={canonical} />
+      {locales.map((l) => (
+        <link rel="alternate" hreflang={getDictionary(l).htmlLang} href={absoluteUrl(localePath(l))} />
+      ))}
+      <link rel="alternate" hreflang="x-default" href={absoluteUrl(localePath(defaultLocale))} />
+
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content={site.brand} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={canonical} />
+      <meta property="og:locale" content={t.ogLocale} />
+      {locales
+        .filter((l) => l !== t.locale)
+        .map((l) => <meta property="og:locale:alternate" content={getDictionary(l).ogLocale} />)}
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:width" content={String(site.ogImageWidth)} />
+      <meta property="og:image:height" content={String(site.ogImageHeight)} />
+      <meta property="og:image:alt" content={t.meta.ogImageAlt} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={ogImage} />
+    </>
+  )
+}
+{schema && <script type="application/ld+json" set:html={jsonLd(schema)} />}

@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ServiceSection from '../components/ServiceSection.astro';
+import About from '../components/About.astro';
+import Areas from '../components/Areas.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Faq from '../components/Faq.astro';
+import Contact from '../components/Contact.astro';
+import StickyWhatsApp from '../components/StickyWhatsApp.astro';
+import { getDictionary, type Locale } from '../i18n';
+import { buildSchema } from '../lib/schema';
+
+interface Props {
+  locale: Locale;
+}
+const t = getDictionary(Astro.props.locale);
+---
+<BaseLayout t={t} title={t.meta.title} description={t.meta.description} schema={buildSchema(t)}>
+  <Hero t={t} />
+  <ServiceSection
+    id="food"
+    tone="surface"
+    illustration="food"
+    eyebrow={t.food.eyebrow}
+    title={t.food.title}
+    lead={t.food.lead}
+    points={t.food.points}
+    note={t.food.note}
+  />
+  <ServiceSection
+    id="cleaning"
+    reverse
+    illustration="home"
+    eyebrow={t.cleaning.eyebrow}
+    title={t.cleaning.title}
+    lead={t.cleaning.lead}
+    points={t.cleaning.points}
+    note={t.cleaning.note}
+  />
+  <Areas t={t} />
+  <About t={t} />
+  <HowItWorks t={t} />
+  <Faq t={t} />
+  <Contact t={t} />
+  <StickyWhatsApp t={t} slot="after" />
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import '../styles/tokens.css';
+import '../styles/base.css';
+import loraCyrillic from '../assets/fonts/lora-cyrillic-wght-normal.woff2?url';
+import loraLatin from '../assets/fonts/lora-latin-wght-normal.woff2?url';
+import SeoHead from '../components/SeoHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import type { Dictionary } from '../i18n';
+
+interface Props {
+  t: Dictionary;
+  title: string;
+  description: string;
+  noindex?: boolean;
+  schema?: unknown;
+}
+const { t, title, description, noindex, schema } = Astro.props;
+// Preload the subset the headings of this language actually use.
+const preloadFont = t.locale === 'es' ? loraLatin : loraCyrillic;
+---
+<!doctype html>
+<html lang={t.htmlLang}>
+  <head>
+    <link rel="preload" href={preloadFont} as="font" type="font/woff2" crossorigin />
+    <SeoHead t={t} title={title} description={description} noindex={noindex} schema={schema} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t.nav.skipToContent}</a>
+    <Header t={t} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer t={t} />
+    <slot name="after" />
+  </body>
+</html>

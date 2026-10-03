@@ -1,0 +1,79 @@
+---
+import type { Dictionary } from '../i18n';
+interface Props { t: Dictionary }
+const { t } = Astro.props;
+---
+{
+  t.faq.items.length > 0 && (
+    <section id="faq" class="faq" aria-labelledby="faq-title">
+      <div class="container narrow">
+        <h2 id="faq-title">{t.faq.title}</h2>
+        <div class="list">
+          {t.faq.items.map((item) => (
+            <details>
+              <summary>
+                <span>{item.q}</span>
+              </summary>
+              <p>{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .faq {
+    padding-block: var(--space-section);
+    background: var(--c-surface);
+  }
+  .narrow {
+    max-width: 48rem;
+  }
+  .list {
+    margin-top: var(--space-6);
+    border-top: 1px solid var(--c-line);
+  }
+  details {
+    border-bottom: 1px solid var(--c-line);
+  }
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-height: 3.5rem;
+    padding-block: var(--space-4);
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-serif);
+    font-size: var(--step-1);
+    font-weight: 600;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary::after {
+    content: '';
+    flex: none;
+    width: 0.65rem;
+    height: 0.65rem;
+    margin-right: 0.35rem;
+    border-right: 2px solid var(--c-accent);
+    border-bottom: 2px solid var(--c-accent);
+    transform: rotate(45deg) translateY(-3px);
+    transition: transform 0.2s ease;
+  }
+  details[open] summary::after {
+    transform: rotate(-135deg) translateY(-3px);
+  }
+  summary:hover {
+    color: var(--c-accent);
+  }
+  details p {
+    padding-bottom: var(--space-5);
+    color: var(--c-ink-muted);
+    max-width: var(--measure);
+  }
+</style>

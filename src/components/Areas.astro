@@ -1,0 +1,87 @@
+---
+import { site } from '../config/site';
+import type { Dictionary } from '../i18n';
+interface Props { t: Dictionary }
+const { t } = Astro.props;
+---
+<section id="areas" class="areas" aria-labelledby="areas-title">
+  <div class="container">
+    <h2 id="areas-title">{t.areas.title}</h2>
+    <p class="lead">{t.areas.lead}</p>
+    <ul class="places">
+      {
+        site.areas.map((area) => (
+          <li class="place" lang="es">
+            <svg width="20" height="24" viewBox="0 0 20 24" aria-hidden="true" focusable="false">
+              <path d="M10 23s8-7.6 8-13.5A8 8 0 0 0 2 9.5C2 15.4 10 23 10 23Z" fill="var(--c-accent)" />
+              <circle cx="10" cy="9.5" r="3" fill="var(--c-bg)" />
+            </svg>
+            <span class="name">{area}</span>
+            <span class="city">{site.city}</span>
+          </li>
+        ))
+      }
+      <li class="place city-card">
+        <span class="name">{t.areas.cityLabel}</span>
+        <span class="city">{site.region}</span>
+      </li>
+    </ul>
+    <p class="other">{t.areas.otherAreas}</p>
+  </div>
+</section>
+
+<style>
+  .areas {
+    padding-block: var(--space-section);
+    background: var(--c-surface);
+  }
+  .container {
+    display: grid;
+    gap: var(--space-4);
+  }
+  .lead {
+    font-size: var(--step-1);
+    color: var(--c-ink-muted);
+  }
+  .places {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: var(--space-4);
+    list-style: none;
+    margin-block: var(--space-4);
+  }
+  .place {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-5);
+    background: var(--c-bg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--c-line);
+  }
+  .place svg {
+    margin-bottom: var(--space-2);
+  }
+  .name {
+    font-family: var(--font-serif);
+    font-size: var(--step-2);
+    font-weight: 600;
+  }
+  .city {
+    color: var(--c-ink-muted);
+    font-size: var(--step--1);
+  }
+  .city-card {
+    background: var(--c-sea);
+    border-color: var(--c-sea);
+    align-content: end;
+  }
+  .city-card .name {
+    color: #fff;
+  }
+  .city-card .city {
+    color: var(--c-sea-soft);
+  }
+  .other {
+    color: var(--c-ink-muted);
+  }
+</style>

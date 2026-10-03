@@ -1,0 +1,42 @@
+---
+import { hasWhatsApp } from '../config/site';
+import type { Dictionary } from '../i18n';
+import WhatsAppButton from './WhatsAppButton.astro';
+
+interface Props { t: Dictionary }
+const { t } = Astro.props;
+---
+{
+  hasWhatsApp && (
+    <div class="sticky-wa">
+      <WhatsAppButton t={t} />
+    </div>
+  )
+}
+
+<style>
+  .sticky-wa {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 30;
+    display: grid;
+    padding: var(--space-3) var(--gutter) calc(var(--space-3) + env(safe-area-inset-bottom));
+    background: rgb(251 247 241 / 0.94);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid var(--c-line);
+  }
+  .sticky-wa :global(.wa-btn) {
+    width: 100%;
+  }
+  :global(body:has(.sticky-wa)) {
+    padding-bottom: calc(var(--sticky-bar-h) + env(safe-area-inset-bottom));
+  }
+  @media (min-width: 48rem) {
+    .sticky-wa {
+      display: none;
+    }
+    :global(body:has(.sticky-wa)) {
+      padding-bottom: 0;
+    }
+  }
+</style>

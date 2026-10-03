@@ -1,0 +1,55 @@
+---
+import type { Dictionary } from '../i18n';
+interface Props { t: Dictionary }
+const { t } = Astro.props;
+---
+<section id="how" class="how" aria-labelledby="how-title">
+  <div class="container">
+    <h2 id="how-title">{t.how.title}</h2>
+    <ol class="steps">
+      {
+        t.how.steps.map((s) => (
+          <li>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .how {
+    padding-block: var(--space-section);
+  }
+  .steps {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+    list-style: none;
+    counter-reset: step;
+  }
+  .steps li {
+    counter-increment: step;
+    display: grid;
+    gap: var(--space-2);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--c-line);
+  }
+  .steps li::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: var(--font-serif);
+    font-size: var(--step-3);
+    line-height: 1;
+    color: var(--c-accent);
+  }
+  .steps p {
+    color: var(--c-ink-muted);
+  }
+  @media (min-width: 48rem) {
+    .steps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

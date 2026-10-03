@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { locales, getDictionary, localePath } from '../i18n';
+import { site } from '../config/site';
+
+const t = getDictionary('ru');
+---
+<BaseLayout t={t} title={`${t.notFound.title} — ${site.brand}`} description={t.notFound.text} noindex>
+  <section class="container nf">
+    <h1>{t.notFound.title}</h1>
+    <ul>
+      {
+        locales.map((l) => {
+          const d = getDictionary(l);
+          return (
+            <li lang={d.htmlLang}>
+              <p>{d.notFound.text}</p>
+              <a href={localePath(l)} hreflang={d.htmlLang}>{d.notFound.back} · {d.languageName}</a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf {
+    display: grid;
+    gap: var(--space-6);
+    padding-block: var(--space-section);
+  }
+  ul {
+    display: grid;
+    gap: var(--space-5);
+    list-style: none;
+  }
+  li {
+    display: grid;
+    gap: var(--space-1);
+  }
+</style>

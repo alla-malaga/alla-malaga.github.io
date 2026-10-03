@@ -1,0 +1,75 @@
+---
+import { site } from '../config/site';
+import type { Dictionary } from '../i18n';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import Logo from './Logo.astro';
+
+interface Props { t: Dictionary }
+const { t } = Astro.props;
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container grid">
+    <div class="about">
+      <p class="brand" lang="es"><Logo /> {site.brand}</p>
+      <p>{t.footer.tagline}</p>
+    </div>
+    <div class="langs">
+      <p class="label">{t.footer.languages}</p>
+      <LanguageSwitcher current={t.locale} label={t.footer.languages} />
+    </div>
+    {
+      site.profiles.length > 0 && (
+        <ul class="profiles">
+          {site.profiles.map((p) => (
+            <li><a href={p.url} rel="noopener">{p.label}</a></li>
+          ))}
+        </ul>
+      )
+    }
+    <p class="copy"><small>© {year} {site.brand}</small></p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: var(--space-7) var(--space-6);
+    border-top: 1px solid var(--c-line);
+    color: var(--c-ink-muted);
+    font-size: var(--step--1);
+  }
+  .grid {
+    display: grid;
+    gap: var(--space-5);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--c-ink);
+  }
+  .label {
+    margin-bottom: var(--space-2);
+  }
+  .langs {
+    justify-self: start;
+  }
+  .profiles {
+    display: flex;
+    gap: var(--space-4);
+    list-style: none;
+  }
+  @media (min-width: 48rem) {
+    .grid {
+      grid-template-columns: 1fr auto;
+      align-items: end;
+    }
+    .langs {
+      justify-self: end;
+    }
+  }
+</style>

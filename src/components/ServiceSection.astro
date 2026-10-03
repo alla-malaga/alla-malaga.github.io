@@ -1,0 +1,107 @@
+---
+import type { Item } from '../i18n/types';
+import Illustration from './Illustration.astro';
+
+interface Props {
+  id: string;
+  eyebrow: string;
+  title: string;
+  lead: string;
+  points: Item[];
+  note: string;
+  illustration: 'food' | 'home';
+  tone?: 'plain' | 'surface';
+  reverse?: boolean;
+}
+const { id, eyebrow, title, lead, points, note, illustration, tone = 'plain', reverse = false } = Astro.props;
+---
+<section id={id} class:list={['service', `tone-${tone}`, { reverse }]} aria-labelledby={`${id}-title`}>
+  <div class="container grid">
+    <div class="text">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2 id={`${id}-title`}>{title}</h2>
+      <p class="lead">{lead}</p>
+      <ul class="points">
+        {
+          points.map((p) => (
+            <li>
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="note">{note}</p>
+    </div>
+    <Illustration name={illustration} class="art" />
+  </div>
+</section>
+
+<style>
+  .service {
+    padding-block: var(--space-section);
+  }
+  .tone-surface {
+    background: var(--c-surface);
+  }
+  .grid {
+    display: grid;
+    gap: var(--space-7);
+    align-items: center;
+  }
+  .text {
+    display: grid;
+    gap: var(--space-4);
+  }
+  .lead {
+    font-size: var(--step-1);
+    color: var(--c-ink-muted);
+    max-width: var(--measure);
+  }
+  .points {
+    display: grid;
+    gap: var(--space-5);
+    list-style: none;
+    margin-top: var(--space-4);
+  }
+  .points li {
+    display: grid;
+    gap: var(--space-1);
+    padding-left: var(--space-5);
+    border-left: 3px solid var(--c-sun);
+  }
+  .points h3 {
+    font-size: var(--step-1);
+  }
+  .points p {
+    color: var(--c-ink-muted);
+  }
+  .note {
+    margin-top: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    background: var(--c-bg);
+    border-radius: var(--radius);
+    font-size: var(--step--1);
+    color: var(--c-ink-muted);
+  }
+  .tone-plain .note {
+    background: var(--c-surface);
+  }
+  .grid :global(.art) {
+    width: min(72%, 24rem);
+    height: auto;
+    justify-self: center;
+  }
+  @media (min-width: 52rem) {
+    .grid {
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: var(--space-8);
+    }
+    .reverse .grid {
+      grid-template-columns: 0.8fr 1.2fr;
+    }
+    .reverse .text {
+      order: 2;
+    }
+  }
+</style>

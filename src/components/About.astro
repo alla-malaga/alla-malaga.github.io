@@ -1,0 +1,52 @@
+---
+import type { Dictionary } from '../i18n';
+interface Props { t: Dictionary }
+const { t } = Astro.props;
+---
+<section id="about" class="about" aria-labelledby="about-title">
+  <div class="container">
+    <div class="card">
+      <h2 id="about-title">{t.about.title}</h2>
+      {t.about.paragraphs.map((p) => <p>{p}</p>)}
+      <p class="sig">{t.about.signature}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    padding-block: var(--space-section);
+  }
+  .card {
+    position: relative;
+    display: grid;
+    gap: var(--space-4);
+    max-width: 46rem;
+    margin-inline: auto;
+    padding: clamp(1.75rem, 1rem + 4vw, 3.5rem);
+    background: var(--c-sea);
+    color: var(--c-sea-soft);
+    border-radius: var(--radius-lg);
+    font-size: var(--step-1);
+    line-height: 1.6;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -18px;
+    right: clamp(1.5rem, 5vw, 3rem);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--c-sun);
+  }
+  h2 {
+    color: #fff;
+  }
+  .sig {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: #fff;
+    font-size: var(--step-2);
+  }
+</style>
