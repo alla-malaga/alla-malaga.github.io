@@ -1,17 +1,39 @@
 ---
-import { site, hasWhatsApp } from '../config/site';
+import { site, hasWhatsApp, hasEmail } from '../config/site';
 import type { Dictionary } from '../i18n';
 import WhatsAppButton from './WhatsAppButton.astro';
 
 interface Props { t: Dictionary }
 const { t } = Astro.props;
+const mailto = `mailto:${site.email}?subject=${encodeURIComponent(t.contact.emailSubject)}`;
+const text = hasWhatsApp || !hasEmail ? t.contact.text : t.contact.emailText;
 ---
 <section id="contact" class="contact" aria-labelledby="contact-title">
   <div class="container">
     <div class="card">
       <h2 id="contact-title">{t.contact.title}</h2>
-      <p>{t.contact.text}</p>
-      {hasWhatsApp ? <WhatsAppButton t={t} variant="light" /> : <p class="pending">{t.contact.pending}</p>}
+      <p>{text}</p>
+      {hasWhatsApp && <WhatsAppButton t={t} variant="light" />}
+      {
+        hasEmail &&
+          (hasWhatsApp ? (
+            <p class="phone">
+              {t.contact.emailLabel}: <a href={mailto}>{site.email}</a>
+            </p>
+          ) : (
+            <>
+              <a class="mail-btn" href={mailto}>
+                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m4 7 8 6 8-6" />
+                </svg>
+                <span>{t.contact.emailButton}</span>
+              </a>
+              <p class="phone"><a href={mailto}>{site.email}</a></p>
+            </>
+          ))
+      }
+      {!hasWhatsApp && !hasEmail && <p class="pending">{t.contact.pending}</p>}
       {
         site.phoneDisplay && (
           <p class="phone">
@@ -54,5 +76,23 @@ const { t } = Astro.props;
   }
   .phone a {
     color: var(--c-on-accent);
+    overflow-wrap: anywhere;
+  }
+  .mail-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 3.25rem;
+    padding: var(--space-3) var(--space-5);
+    border-radius: 999px;
+    background: var(--c-on-accent);
+    color: var(--c-accent);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  .mail-btn:hover {
+    background: #fff;
+    color: var(--c-accent-hover);
   }
 </style>

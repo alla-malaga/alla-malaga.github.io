@@ -13,6 +13,7 @@ const year = new Date().getFullYear();
     <div class="about">
       <p class="brand" lang="es"><Logo /> {site.brand}</p>
       <p>{t.footer.tagline}</p>
+      {site.email && <p><a href={`mailto:${site.email}`}>{site.email}</a></p>}
     </div>
     <div class="langs">
       <p class="label">{t.footer.languages}</p>

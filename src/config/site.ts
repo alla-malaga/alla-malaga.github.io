@@ -16,6 +16,9 @@ export const site = {
    */
   whatsappNumber: '' as string,
 
+  /** Public contact email. While empty, it is not shown. */
+  email: 'allisa.naumova@gmail.com' as string,
+
   /** Phone number as shown to people, e.g. '+34 600 00 00 00'. Optional. */
   phoneDisplay: '' as string,
 
@@ -42,3 +45,4 @@ export const site = {
 } as const;
 
 export const hasWhatsApp = site.whatsappNumber.trim().length > 0;
+export const hasEmail = site.email.trim().length > 0;

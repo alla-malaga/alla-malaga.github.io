@@ -88,6 +88,11 @@ export interface Dictionary {
     text: string;
     phoneLabel: string;
     pending: string;
+    /** Shown instead of `text` while there is no WhatsApp number. */
+    emailText: string;
+    emailLabel: string;
+    emailButton: string;
+    emailSubject: string;
   };
 
   whatsapp: {

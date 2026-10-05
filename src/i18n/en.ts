@@ -109,6 +109,10 @@ const en: Dictionary = {
     text: 'The easiest way to reach me is WhatsApp. Tell me what you need and I’ll reply.',
     phoneLabel: 'Phone',
     pending: 'A WhatsApp contact will appear on this page soon.',
+    emailText: 'For now, the easiest way to reach me is by email. Tell me what you need and I’ll reply.',
+    emailLabel: 'Email',
+    emailButton: 'Send an email',
+    emailSubject: 'Enquiry from the website',
   },
 
   whatsapp: {

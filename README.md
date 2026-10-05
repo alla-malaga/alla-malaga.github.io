@@ -11,7 +11,7 @@ Static site (Astro, TypeScript, no client JS) for Alla: home-cooked food to orde
 
 ## Editing content
 
-- **Facts** (WhatsApp number, phone, areas, profile links): `src/config/site.ts`.
+- **Facts** (WhatsApp number, email, phone, areas, profile links): `src/config/site.ts`.
   While `whatsappNumber` is empty, the WhatsApp buttons are hidden and the build prints a warning.
 - **Texts** for each language: `src/i18n/ru.ts`, `es.ts`, `uk.ts`, `en.ts`.
   All of them share the type in `src/i18n/types.ts`, so a missing translation fails `npm run check`.
