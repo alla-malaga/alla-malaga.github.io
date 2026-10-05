@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build && node scripts/verify-build.mjs",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "encode-email": "node -e \"console.log(btoa([...process.argv[1]].reverse().join('')))\""
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

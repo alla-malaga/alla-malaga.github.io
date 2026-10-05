@@ -13,6 +13,7 @@ Static site (Astro, TypeScript, almost no client JS) for Alla: home-cooked food 
 
 - **Facts** (WhatsApp number, email, phone, areas, profile links): `src/config/site.ts`.
   While `whatsappNumber` is empty, the WhatsApp buttons are hidden and the build prints a warning.
+  Email is stored encoded (`emailEncoded`); generate the value with `npm run encode-email -- new@address`.
 - **Texts** for each language: `src/i18n/ru.ts`, `es.ts`, `uk.ts`, `en.ts`.
   All of them share the type in `src/i18n/types.ts`, so a missing translation fails `npm run check`.
 - Prices are intentionally not published.

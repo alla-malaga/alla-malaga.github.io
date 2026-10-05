@@ -16,8 +16,12 @@ export const site = {
    */
   whatsappNumber: '' as string,
 
-  /** Public contact email. While empty, it is not shown. */
-  email: 'allisa.naumova@gmail.com' as string,
+  /**
+   * Public contact email, stored encoded (reversed + base64) so scrapers can't read it from the source.
+   * To change it, run `npm run encode-email -- new@address` and paste the output here.
+   * Leave empty to hide email on the site.
+   */
+  emailEncoded: 'bW9jLmxpYW1nQGF2b211YW4uYXNpbGxh' as string,
 
   /** Phone number as shown to people, e.g. '+34 600 00 00 00'. Optional. */
   phoneDisplay: '' as string,
@@ -45,4 +49,7 @@ export const site = {
 } as const;
 
 export const hasWhatsApp = site.whatsappNumber.trim().length > 0;
-export const hasEmail = site.email.trim().length > 0;
+export const hasEmail = site.emailEncoded.trim().length > 0;
+
+/** Decoded email, only for build-time use (never rendered as plain text). */
+export const contactEmail = hasEmail ? [...atob(site.emailEncoded)].reverse().join('') : '';

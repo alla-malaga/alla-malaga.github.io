@@ -4,7 +4,7 @@
  * it is stored reversed + base64 in data-e and assembled by EmailScript.astro.
  * Without JavaScript, `showAddress` links fall back to "name [at] domain".
  */
-import { site } from '../config/site';
+import { site, contactEmail } from '../config/site';
 
 interface Props {
   subject?: string;
@@ -13,8 +13,8 @@ interface Props {
   class?: string;
 }
 const { subject, showAddress = false, class: className } = Astro.props;
-const encoded = btoa([...site.email].reverse().join(''));
-const [user, domain] = site.email.split('@');
+const encoded = site.emailEncoded;
+const [user, domain] = contactEmail.split('@');
 ---
 <a
   class:list={['email-link', className]}
