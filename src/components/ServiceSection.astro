@@ -35,6 +35,7 @@ const { id, eyebrow, title, lead, points, note, illustration, tone = 'plain', re
     </div>
     <Illustration name={illustration} class="art" />
   </div>
+  {Astro.slots.has('default') && <div class="container"><slot /></div>}
 </section>
 
 <style>

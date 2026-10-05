@@ -1,0 +1,153 @@
+---
+import type { Dictionary } from '../i18n';
+
+interface Props { t: Dictionary }
+const { t } = Astro.props;
+const art = ['pelmeni', 'vareniki', 'pirozhki'] as const;
+---
+<div class="dishes">
+  <h3 class="title">{t.food.dishesTitle}</h3>
+  <ul class="grid">
+    {
+      t.food.dishes.map((dish, i) => (
+        <li class="card">
+          <div class="plate">
+            {art[i] === 'pelmeni' && (
+              <svg viewBox="0 0 200 140" aria-hidden="true" focusable="false">
+                <ellipse cx="100" cy="128" rx="78" ry="8" fill="#000" opacity=".06" />
+                <ellipse cx="100" cy="76" rx="88" ry="52" fill="#fff" />
+                <ellipse cx="100" cy="76" rx="88" ry="52" fill="none" stroke="var(--c-sea)" stroke-width="3" />
+                <ellipse cx="100" cy="76" rx="70" ry="38" fill="none" stroke="var(--c-sea-soft)" stroke-width="2" />
+                {[
+                  [62, 66], [96, 54], [132, 64], [74, 92], [112, 88], [146, 92], [94, 76],
+                ].map(([x, y]) => (
+                  <g transform={`translate(${x} ${y}) scale(1.12)`}>
+                    <ellipse cx="0" cy="3" rx="16" ry="11" fill="#000" opacity=".07" />
+                    <path d="M-15 1c0-9 7-13 15-13s15 4 15 13c0 6-7 9-15 9s-15-3-15-9Z" fill="#f6ead3" />
+                    <path d="M-12 2c3 4 8 5 12 5s9-1 12-5" fill="none" stroke="#dcc6a0" stroke-width="2" stroke-linecap="round" />
+                    <ellipse cx="0" cy="-3" rx="5" ry="3.5" fill="#ecdab9" />
+                    <path d="M-7 -8c3-2 9-2 12 0" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".8" />
+                  </g>
+                ))}
+                <path d="M128 40c8-4 18-2 22 4-6 5-17 5-22-4Z" fill="#fffdf8" stroke="#eee3d2" />
+                <g stroke="var(--c-olive)" stroke-width="2" stroke-linecap="round">
+                  <path d="M52 50l10 6M58 46l2 8M48 56l9 1" />
+                  <path d="M150 112l-9-5M146 116l-1-8M156 108l-9 0" />
+                </g>
+              </svg>
+            )}
+            {art[i] === 'vareniki' && (
+              <svg viewBox="0 0 200 140" aria-hidden="true" focusable="false">
+                <ellipse cx="100" cy="128" rx="78" ry="8" fill="#000" opacity=".06" />
+                <ellipse cx="100" cy="76" rx="88" ry="52" fill="#fff" />
+                <ellipse cx="100" cy="76" rx="88" ry="52" fill="none" stroke="var(--c-accent)" stroke-width="3" />
+                {[
+                  [72, 64, -12], [124, 60, 10], [66, 96, 8], [114, 96, -6], [146, 84, 14],
+                ].map(([x, y, r]) => (
+                  <g transform={`translate(${x} ${y}) rotate(${r})`}>
+                    <ellipse cx="0" cy="8" rx="24" ry="6" fill="#000" opacity=".07" />
+                    <path d="M-25 8A25 21 0 0 1 25 8Z" fill="#f7ecd8" />
+                    <path d="M-21 6A21 17 0 0 1 21 6" fill="none" stroke="#dfc9a3" stroke-width="4" stroke-dasharray="0.5 6" stroke-linecap="round" />
+                    <path d="M-12 -4a14 10 0 0 1 14 -6" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" />
+                  </g>
+                ))}
+                <g fill="#8a3720">
+                  <circle cx="94" cy="80" r="2.5" /><circle cx="100" cy="77" r="2" /><circle cx="140" cy="70" r="2.5" />
+                </g>
+                <path d="M84 40c7-5 17-4 22 2-6 6-17 6-22-2Z" fill="#fffdf8" stroke="#eee3d2" />
+              </svg>
+            )}
+            {art[i] === 'pirozhki' && (
+              <svg viewBox="0 0 200 140" aria-hidden="true" focusable="false">
+                <ellipse cx="100" cy="128" rx="80" ry="8" fill="#000" opacity=".06" />
+                <rect x="18" y="34" width="164" height="90" rx="16" fill="#c99a6b" />
+                <rect x="18" y="34" width="164" height="90" rx="16" fill="none" stroke="#a87a4e" stroke-width="2" />
+                <path d="M30 34v90M170 34v90" stroke="#b78858" stroke-width="2" opacity=".6" />
+                <path d="M18 44h164M18 114h164" stroke="var(--c-accent)" stroke-width="5" opacity=".35" />
+                {[
+                  [66, 62, -8], [134, 60, 6], [100, 92, 0], [52, 98, 10], [150, 96, -10],
+                ].map(([x, y, r]) => (
+                  <g transform={`translate(${x} ${y}) rotate(${r})`}>
+                    <ellipse cx="0" cy="8" rx="28" ry="8" fill="#000" opacity=".12" />
+                    <ellipse cx="0" cy="0" rx="28" ry="14" fill="#d9954b" />
+                    <ellipse cx="0" cy="-3" rx="24" ry="9" fill="#e7ab62" />
+                    <path d="M-18 -3c4-3 6 2 9-1s5 2 9-1 5 2 9-1 5 2 9 0" fill="none" stroke="#b86f2f" stroke-width="2" stroke-linecap="round" />
+                    <ellipse cx="-9" cy="-8" rx="9" ry="2.5" fill="#fff" opacity=".35" />
+                  </g>
+                ))}
+              </svg>
+            )}
+          </div>
+          <h4>{dish.name}</h4>
+          <p>{dish.text}</p>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="note">{t.food.dishesNote}</p>
+</div>
+
+<style>
+  .dishes {
+    display: grid;
+    gap: var(--space-5);
+    margin-top: var(--space-7);
+  }
+  .title {
+    font-size: var(--step-2);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--space-5);
+    list-style: none;
+  }
+  .card {
+    display: grid;
+    gap: var(--space-2);
+    align-content: start;
+    padding: var(--space-5);
+    background: var(--c-bg);
+    border-radius: var(--radius-lg);
+  }
+  .plate {
+    margin-bottom: var(--space-2);
+    padding: var(--space-3);
+    background: var(--c-surface-2);
+    border-radius: var(--radius);
+  }
+  .plate svg {
+    width: 100%;
+    height: auto;
+  }
+  h4 {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: var(--step-2);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .card p {
+    color: var(--c-ink-muted);
+  }
+  .note {
+    color: var(--c-ink-muted);
+  }
+  @media (max-width: 35.99rem) {
+    .card {
+      grid-template-columns: 7.5rem 1fr;
+      column-gap: var(--space-4);
+      padding: var(--space-4);
+    }
+    .plate {
+      grid-row: span 2;
+      align-self: center;
+      margin: 0;
+      padding: var(--space-2);
+    }
+    h4 {
+      align-self: end;
+      font-size: var(--step-1);
+    }
+  }
+</style>

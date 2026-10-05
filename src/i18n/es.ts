@@ -10,7 +10,7 @@ const es: Dictionary = {
   meta: {
     title: 'Comida casera y limpieza de pisos en Málaga | Alla',
     description:
-      'Comida casera por encargo, limpieza de pisos y ayuda en el hogar en Málaga: La Luz y La Paz. Alla, trato personal y sin agencia. Escríbeme por WhatsApp.',
+      'Pelmeni, varéniki y pirozhkí caseros por encargo, limpieza de pisos y ayuda en el hogar en Málaga: La Luz y La Paz. Escríbeme por WhatsApp.',
     ogImageAlt: 'Alla · Málaga — comida casera y limpieza en Málaga',
   },
 
@@ -43,6 +43,13 @@ const es: Dictionary = {
       { title: 'Detalles por WhatsApp', text: 'Cantidades, horario y cómo entregar el pedido lo acordamos por mensaje.' },
     ],
     note: 'No publico precios: depende de los platos y la cantidad. Escríbeme y te respondo personalmente.',
+    dishesTitle: 'Lo que cocino',
+    dishes: [
+      { name: 'Pelmeni', text: 'Pequeñas empanadillas rusas, como las de casa.' },
+      { name: 'Varéniki', text: 'Empanadillas ucranianas en forma de media luna.' },
+      { name: 'Pirozhkí', text: 'Bollitos rellenos, dorados y caseros.' },
+    ],
+    dishesNote: 'Rellenos, cantidad y fecha: lo hablamos por WhatsApp.',
   },
 
   cleaning: {
@@ -124,7 +131,7 @@ const es: Dictionary = {
   },
 
   schema: {
-    businessDescription: 'Comida casera por encargo, limpieza de pisos y ayuda en el hogar en Málaga (La Luz, La Paz).',
+    businessDescription: 'Comida casera por encargo (pelmeni, varéniki, pirozhkí), limpieza de pisos y ayuda en el hogar en Málaga (La Luz, La Paz).',
     foodService: 'Comida casera por encargo',
     cleaningService: 'Limpieza de pisos',
     homeHelpService: 'Ayuda en el hogar',
