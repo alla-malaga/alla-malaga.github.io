@@ -2,11 +2,12 @@ import { locales, defaultLocale, type Locale, type Dictionary } from './types';
 import ru from './ru';
 import es from './es';
 import uk from './uk';
+import en from './en';
 
 export { locales, defaultLocale };
 export type { Locale, Dictionary };
 
-const dictionaries: Record<Locale, Dictionary> = { ru, es, uk };
+const dictionaries: Record<Locale, Dictionary> = { ru, es, uk, en };
 
 export function getDictionary(locale: Locale): Dictionary {
   return dictionaries[locale];

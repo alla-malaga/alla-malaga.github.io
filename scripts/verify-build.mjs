@@ -3,7 +3,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 const dist = new URL('../dist/', import.meta.url).pathname;
-const pages = { ru: 'index.html', es: 'es/index.html', uk: 'uk/index.html' };
+const pages = { ru: 'index.html', es: 'es/index.html', uk: 'uk/index.html', en: 'en/index.html' };
 const errors = [];
 const warnings = [];
 const seen = { title: new Map(), description: new Map() };
@@ -40,7 +40,7 @@ for (const [lang, file] of Object.entries(pages)) {
   const canonicals = html.match(/<link rel="canonical"[^>]*>/g) || [];
   if (canonicals.length !== 1) fail(`expected one canonical, found ${canonicals.length}`);
 
-  for (const hl of ['ru', 'es', 'uk', 'x-default']) {
+  for (const hl of [...Object.keys(pages), 'x-default']) {
     if (!html.includes(`hreflang="${hl}" href="https://`)) fail(`missing hreflang="${hl}" alternate`);
   }
   for (const og of ['og:title', 'og:description', 'og:url', 'og:image', 'og:locale']) {

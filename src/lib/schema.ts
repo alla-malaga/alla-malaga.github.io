@@ -1,5 +1,5 @@
 import { site } from '../config/site';
-import { absoluteUrl, localePath, publicPath, defaultLocale, type Dictionary } from '../i18n';
+import { absoluteUrl, localePath, publicPath, defaultLocale, locales, getDictionary, type Dictionary } from '../i18n';
 
 /**
  * JSON-LD graph for a localized home page.
@@ -78,7 +78,7 @@ export function buildSchema(t: Dictionary) {
         '@id': `${root}#website`,
         url: root,
         name: site.brand,
-        inLanguage: ['ru', 'es', 'uk'],
+        inLanguage: locales.map((l) => getDictionary(l).htmlLang),
         publisher: { '@id': businessId },
       },
       {

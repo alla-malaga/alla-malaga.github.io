@@ -17,7 +17,7 @@ interface Props {
 }
 const { t, title, description, noindex, schema } = Astro.props;
 // Preload the subset the headings of this language actually use.
-const preloadFont = t.locale === 'es' ? loraLatin : loraCyrillic;
+const preloadFont = t.locale === 'es' || t.locale === 'en' ? loraLatin : loraCyrillic;
 ---
 <!doctype html>
 <html lang={t.htmlLang}>

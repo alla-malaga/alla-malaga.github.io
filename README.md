@@ -7,13 +7,14 @@ Static site (Astro, TypeScript, no client JS) for Alla: home-cooked food to orde
 | Russian (default, x-default) | `/` |
 | Spanish | `/es/` |
 | Ukrainian | `/uk/` |
+| English | `/en/` |
 
 ## Editing content
 
 - **Facts** (WhatsApp number, phone, areas, profile links): `src/config/site.ts`.
   While `whatsappNumber` is empty, the WhatsApp buttons are hidden and the build prints a warning.
-- **Texts** for each language: `src/i18n/ru.ts`, `es.ts`, `uk.ts`.
-  All three share the type in `src/i18n/types.ts`, so a missing translation fails `npm run check`.
+- **Texts** for each language: `src/i18n/ru.ts`, `es.ts`, `uk.ts`, `en.ts`.
+  All of them share the type in `src/i18n/types.ts`, so a missing translation fails `npm run check`.
 - Prices are intentionally not published.
 
 Never add facts that aren't confirmed: no invented experience, reviews, prices, or a street address.
@@ -39,7 +40,7 @@ real URL and base path automatically, so canonical/hreflang/sitemap stay correct
 
 ## SEO
 
-- Per-language `<title>`, description, canonical, hreflang (ru/es/uk/x-default), OpenGraph/Twitter.
+- Per-language `<title>`, description, canonical, hreflang (ru/es/uk/en/x-default), OpenGraph/Twitter.
 - JSON-LD: `WebSite`, `WebPage`, `LocalBusiness` (city only, no street), `Service` ×3, `FAQPage`;
   `areaServed` = Málaga, La Luz, La Paz.
 - `sitemap-index.xml` with hreflang alternates, `robots.txt`.

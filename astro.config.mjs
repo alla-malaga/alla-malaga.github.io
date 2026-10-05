@@ -20,7 +20,7 @@ export default defineConfig({
       filter: (page) => !page.includes('/404'),
       i18n: {
         defaultLocale: 'ru',
-        locales: { ru: 'ru', es: 'es', uk: 'uk' },
+        locales: { ru: 'ru', es: 'es', uk: 'uk', en: 'en' },
       },
     }),
   ],
