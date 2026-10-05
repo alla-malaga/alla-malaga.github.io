@@ -43,13 +43,6 @@ const es: Dictionary = {
       { title: 'Detalles por WhatsApp', text: 'Cantidades, horario y cómo entregar el pedido lo acordamos por mensaje.' },
     ],
     note: 'No publico precios: depende de los platos y la cantidad. Escríbeme y te respondo personalmente.',
-    dishesTitle: 'Lo que cocino',
-    dishes: [
-      { name: 'Pelmeni', text: 'Pequeñas empanadillas rusas, como las de casa.' },
-      { name: 'Varéniki', text: 'Empanadillas ucranianas en forma de media luna.' },
-      { name: 'Pirozhkí', text: 'Bollitos rellenos, dorados y caseros.' },
-    ],
-    dishesNote: 'Rellenos, cantidad y fecha: lo hablamos por WhatsApp.',
   },
 
   cleaning: {

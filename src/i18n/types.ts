@@ -50,9 +50,6 @@ export interface Dictionary {
     lead: string;
     points: Item[];
     note: string;
-    dishesTitle: string;
-    dishes: { name: string; text: string }[];
-    dishesNote: string;
   };
 
   cleaning: {

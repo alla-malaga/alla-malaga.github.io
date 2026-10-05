@@ -43,13 +43,6 @@ const en: Dictionary = {
       { title: 'Details on WhatsApp', text: 'Quantities, timing and how to hand over the order — we sort it out by message.' },
     ],
     note: 'I don’t publish prices: it depends on the dishes and the amount. Message me and I’ll reply personally.',
-    dishesTitle: 'What I cook',
-    dishes: [
-      { name: 'Pelmeni', text: 'Small Russian dumplings, just like at home.' },
-      { name: 'Vareniki', text: 'Ukrainian half-moon dumplings.' },
-      { name: 'Pirozhki', text: 'Golden, homemade filled buns.' },
-    ],
-    dishesNote: 'Fillings, quantity and date — we discuss them on WhatsApp.',
   },
 
   cleaning: {
