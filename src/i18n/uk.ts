@@ -127,6 +127,14 @@ const uk: Dictionary = {
     languages: 'Мови',
   },
 
+  consent: {
+    label: 'Згода на cookies',
+    text: 'Сайт використовує Google Analytics, щоб розуміти, скільки людей його відвідує. Cookies аналітики вмикаються лише з вашої згоди.',
+    accept: 'Дозволити',
+    decline: 'Відмовитися',
+    settings: 'Налаштування cookies',
+  },
+
   schema: {
     businessDescription: 'Домашня їжа на замовлення (пельмені, вареники, пиріжки), прибирання квартир і допомога по дому в Малазі (La Luz, La Paz).',
     foodService: 'Домашня їжа на замовлення',

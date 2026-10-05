@@ -1,0 +1,127 @@
+---
+/**
+ * Google Analytics 4, loaded only after the visitor accepts the consent banner.
+ * Nothing is requested from Google before consent. The choice is kept in localStorage
+ * and can be changed with any element marked [data-consent-open] (footer link).
+ */
+import { site } from '../config/site';
+import type { Dictionary } from '../i18n';
+
+interface Props { t: Dictionary }
+const { t } = Astro.props;
+---
+<div class="consent" data-consent hidden role="region" aria-label={t.consent.label}>
+  <p>{t.consent.text}</p>
+  <div class="buttons">
+    <button type="button" data-consent-choice="denied">{t.consent.decline}</button>
+    <button type="button" data-consent-choice="granted">{t.consent.accept}</button>
+  </div>
+</div>
+
+<script is:inline define:vars={{ gaId: site.gaMeasurementId }}>
+  (function () {
+    var KEY = 'analytics-consent';
+    var banner = document.querySelector('[data-consent]');
+    var loaded = false;
+
+    function read() {
+      try { return localStorage.getItem(KEY); } catch (e) { return null; }
+    }
+    function save(v) {
+      try { localStorage.setItem(KEY, v); } catch (e) {}
+    }
+    function load() {
+      if (loaded) return;
+      loaded = true;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', gaId);
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(gaId);
+      document.head.appendChild(s);
+    }
+    function revoke() {
+      if (window.gtag) gtag('consent', 'update', { analytics_storage: 'denied' });
+      document.cookie.split(';').forEach(function (c) {
+        var name = c.split('=')[0].trim();
+        if (/^_ga/.test(name)) {
+          document.cookie = name + '=; Max-Age=0; path=/';
+          document.cookie = name + '=; Max-Age=0; path=/; domain=' + location.hostname;
+          document.cookie = name + '=; Max-Age=0; path=/; domain=.' + location.hostname;
+        }
+      });
+    }
+
+    var choice = read();
+    if (choice === 'granted') load();
+    else if (choice !== 'denied') banner.hidden = false;
+
+    banner.addEventListener('click', function (e) {
+      var v = e.target.closest('[data-consent-choice]');
+      if (!v) return;
+      v = v.getAttribute('data-consent-choice');
+      save(v);
+      banner.hidden = true;
+      if (v === 'granted') load(); else revoke();
+    });
+    document.querySelectorAll('[data-consent-open]').forEach(function (el) {
+      el.hidden = false;
+      el.addEventListener('click', function () {
+        banner.hidden = false;
+        banner.querySelector('button').focus();
+      });
+    });
+  })();
+</script>
+
+<style>
+  .consent {
+    position: fixed;
+    z-index: 40;
+    inset: auto var(--space-3) calc(var(--space-3) + env(safe-area-inset-bottom)) var(--space-3);
+    display: grid;
+    gap: var(--space-3);
+    max-width: 34rem;
+    margin-inline: auto;
+    padding: var(--space-4) var(--space-5);
+    background: var(--c-ink);
+    color: var(--c-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 12px 32px -12px rgb(42 38 34 / 0.5);
+    font-size: var(--step--1);
+    line-height: 1.5;
+  }
+  .consent[hidden] {
+    display: none;
+  }
+  .buttons {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: flex-end;
+  }
+  button {
+    flex: 1 1 0;
+    min-height: 2.75rem;
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--c-bg);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--c-bg);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:hover {
+    background: rgb(251 247 241 / 0.12);
+  }
+  button:focus-visible {
+    outline-color: var(--c-sun);
+  }
+  @media (min-width: 40rem) {
+    button {
+      flex: 0 0 auto;
+    }
+  }
+</style>

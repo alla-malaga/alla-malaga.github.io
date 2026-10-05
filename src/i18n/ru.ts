@@ -127,6 +127,14 @@ const ru: Dictionary = {
     languages: 'Языки',
   },
 
+  consent: {
+    label: 'Согласие на cookies',
+    text: 'Сайт использует Google Analytics, чтобы понимать, сколько людей его посещает. Cookies аналитики включаются только с вашего согласия.',
+    accept: 'Разрешить',
+    decline: 'Отказаться',
+    settings: 'Настройки cookies',
+  },
+
   schema: {
     businessDescription: 'Домашняя еда на заказ (пельмени, вареники, пирожки), уборка квартир и помощь по дому в Малаге (La Luz, La Paz).',
     foodService: 'Домашняя еда на заказ',

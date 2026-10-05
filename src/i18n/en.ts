@@ -127,6 +127,14 @@ const en: Dictionary = {
     languages: 'Languages',
   },
 
+  consent: {
+    label: 'Cookie consent',
+    text: 'This site uses Google Analytics to understand how many people visit it. Analytics cookies are only enabled with your consent.',
+    accept: 'Accept',
+    decline: 'Decline',
+    settings: 'Cookie settings',
+  },
+
   schema: {
     businessDescription: 'Home-cooked food to order (pelmeni, vareniki, pirozhki), apartment cleaning and help at home in Málaga (La Luz, La Paz).',
     foodService: 'Home-cooked food to order',

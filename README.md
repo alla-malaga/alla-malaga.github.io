@@ -39,6 +39,12 @@ For the site to live at `https://alla-malaga.github.io/`, the repository must be
 `alla-malaga.github.io`. Under any other name, GitHub serves it at `/<repo>/`. The workflow picks up the
 real URL and base path automatically, so canonical/hreflang/sitemap stay correct either way.
 
+## Analytics
+
+Google Analytics 4 (`gaMeasurementId` in `src/config/site.ts`) is loaded **only after** the visitor
+accepts the consent banner; nothing is sent to Google before that. Visitors can change their choice via
+"Cookie settings" in the footer. Empty the ID to remove analytics and the banner.
+
 ## SEO
 
 - Email is never in the HTML: `EmailLink` stores it encoded and a tiny inline script builds the `mailto:` link.

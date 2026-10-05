@@ -109,6 +109,15 @@ export interface Dictionary {
     languages: string;
   };
 
+  /** Analytics cookie consent banner. */
+  consent: {
+    label: string;
+    text: string;
+    accept: string;
+    decline: string;
+    settings: string;
+  };
+
   /** Names of services for structured data. */
   schema: {
     businessDescription: string;

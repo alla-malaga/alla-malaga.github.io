@@ -7,7 +7,8 @@ import SeoHead from '../components/SeoHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import EmailScript from '../components/EmailScript.astro';
-import { hasEmail } from '../config/site';
+import Analytics from '../components/Analytics.astro';
+import { hasEmail, site } from '../config/site';
 import type { Dictionary } from '../i18n';
 
 interface Props {
@@ -36,5 +37,6 @@ const preloadFont = t.locale === 'es' || t.locale === 'en' ? loraLatin : loraCyr
     <Footer t={t} />
     <slot name="after" />
     {hasEmail && <EmailScript />}
+    {site.gaMeasurementId && <Analytics t={t} />}
   </body>
 </html>

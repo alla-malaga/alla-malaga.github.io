@@ -127,6 +127,14 @@ const es: Dictionary = {
     languages: 'Idiomas',
   },
 
+  consent: {
+    label: 'Consentimiento de cookies',
+    text: 'Esta web usa Google Analytics para saber cuántas personas la visitan. Las cookies de análisis solo se activan si lo aceptas.',
+    accept: 'Aceptar',
+    decline: 'Rechazar',
+    settings: 'Configuración de cookies',
+  },
+
   schema: {
     businessDescription: 'Comida casera por encargo (pelmeni, varéniki, pirozhkí), limpieza de pisos y ayuda en el hogar en Málaga (La Luz, La Paz).',
     foodService: 'Comida casera por encargo',

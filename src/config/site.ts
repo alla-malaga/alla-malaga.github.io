@@ -23,6 +23,9 @@ export const site = {
    */
   emailEncoded: 'bW9jLmxpYW1nQGF2b211YW4uYXNpbGxh' as string,
 
+  /** Google Analytics 4 measurement ID. Loaded only after cookie consent. Empty = no analytics. */
+  gaMeasurementId: 'G-V6LPTDMBZJ' as string,
+
   /** Phone number as shown to people, e.g. '+34 600 00 00 00'. Optional. */
   phoneDisplay: '' as string,
 
