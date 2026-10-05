@@ -6,6 +6,8 @@ import loraLatin from '../assets/fonts/lora-latin-wght-normal.woff2?url';
 import SeoHead from '../components/SeoHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import EmailScript from '../components/EmailScript.astro';
+import { hasEmail } from '../config/site';
 import type { Dictionary } from '../i18n';
 
 interface Props {
@@ -33,5 +35,6 @@ const preloadFont = t.locale === 'es' || t.locale === 'en' ? loraLatin : loraCyr
     </main>
     <Footer t={t} />
     <slot name="after" />
+    {hasEmail && <EmailScript />}
   </body>
 </html>

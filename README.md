@@ -1,6 +1,6 @@
 # Alla · Málaga
 
-Static site (Astro, TypeScript, no client JS) for Alla: home-cooked food to order and apartment cleaning in Málaga (La Luz, La Paz).
+Static site (Astro, TypeScript, almost no client JS) for Alla: home-cooked food to order and apartment cleaning in Málaga (La Luz, La Paz).
 
 | Language | URL |
 |---|---|
@@ -40,6 +40,7 @@ real URL and base path automatically, so canonical/hreflang/sitemap stay correct
 
 ## SEO
 
+- Email is never in the HTML: `EmailLink` stores it encoded and a tiny inline script builds the `mailto:` link.
 - Per-language `<title>`, description, canonical, hreflang (ru/es/uk/en/x-default), OpenGraph/Twitter.
 - JSON-LD: `WebSite`, `WebPage`, `LocalBusiness` (city only, no street), `Service` ×3, `FAQPage`;
   `areaServed` = Málaga, La Luz, La Paz.

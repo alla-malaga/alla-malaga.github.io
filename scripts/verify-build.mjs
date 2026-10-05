@@ -58,7 +58,8 @@ for (const [lang, file] of Object.entries(pages)) {
   }
 
   if (/TODO[:\s]/.test(html)) fail('contains a TODO placeholder');
-  if (/<script(?![^>]*application\/ld\+json)[^>]*>/.test(html)) warnings.push(`${file}: ships client JavaScript`);
+  if (/<script[^>]*\ssrc=/.test(html)) warnings.push(`${file}: loads external JavaScript`);
+  if (/[\w.+-]+@[\w-]+\.[a-z]{2,}/i.test(html)) fail('contains a plain-text email address (use EmailLink)');
   if (!html.includes('wa.me/')) warnings.push(`${file}: no WhatsApp link (set whatsappNumber in src/config/site.ts)`);
 }
 

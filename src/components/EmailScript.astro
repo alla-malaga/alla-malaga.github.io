@@ -1,0 +1,10 @@
+---
+// Decodes EmailLink addresses in the browser (see EmailLink.astro).
+---
+<script is:inline>
+  document.querySelectorAll('a[data-e]').forEach(function (a) {
+    var e = atob(a.dataset.e).split('').reverse().join('');
+    a.href = 'mailto:' + e + (a.dataset.s ? '?subject=' + a.dataset.s : '');
+    if (a.dataset.show !== undefined) a.textContent = e;
+  });
+</script>

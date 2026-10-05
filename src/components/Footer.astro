@@ -3,6 +3,7 @@ import { site } from '../config/site';
 import type { Dictionary } from '../i18n';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import Logo from './Logo.astro';
+import EmailLink from './EmailLink.astro';
 
 interface Props { t: Dictionary }
 const { t } = Astro.props;
@@ -13,7 +14,7 @@ const year = new Date().getFullYear();
     <div class="about">
       <p class="brand" lang="es"><Logo /> {site.brand}</p>
       <p>{t.footer.tagline}</p>
-      {site.email && <p><a href={`mailto:${site.email}`}>{site.email}</a></p>}
+      {site.email && <p><EmailLink showAddress /></p>}
     </div>
     <div class="langs">
       <p class="label">{t.footer.languages}</p>

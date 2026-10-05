@@ -45,7 +45,6 @@ export function buildSchema(t: Dictionary) {
     founder: { '@type': 'Person', name: site.personName },
   };
   if (site.phoneDisplay) business.telephone = site.phoneDisplay;
-  if (site.email) business.email = site.email;
   if (site.profiles.length) business.sameAs = site.profiles.map((p) => p.url);
 
   const services = [t.schema.foodService, t.schema.cleaningService, t.schema.homeHelpService].map(
